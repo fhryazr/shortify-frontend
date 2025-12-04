@@ -1,5 +1,5 @@
-import CustomSidebar from "@/components/sidebar-app";
-import CustomSidebarTrigger from "@/components/sidebar-trigger-app";
+import CustomSidebar from "@/components/shared/sidebar-app";
+import CustomSidebarTrigger from "@/components/shared/sidebar-trigger-app";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 

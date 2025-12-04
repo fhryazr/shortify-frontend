@@ -1,6 +1,6 @@
 "use client";
 
-import { SidebarTrigger } from "./ui/sidebar";
+import { SidebarTrigger } from "../ui/sidebar";
 import { usePathname } from "next/navigation";
 import BreadcrumbApp from "./breadcrumb-app";
 

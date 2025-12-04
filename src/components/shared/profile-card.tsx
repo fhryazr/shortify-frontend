@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardContent } from "./ui/card";
-import { Avatar } from "./ui/avatar";
+import { Card, CardContent } from "../ui/card";
+import { Avatar } from "../ui/avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 type ProfileCardProps = {
