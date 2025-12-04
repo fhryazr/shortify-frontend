@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   ChartLine,
   LayoutDashboard,
@@ -20,6 +19,7 @@ import {
 } from "./ui/sidebar";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { usePathname } from "next/navigation";
 
 const items = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -30,7 +30,8 @@ const items = [
 ];
 
 const CustomSidebar = () => {
-  const [active, setActive] = useState("Dashboard");
+  const pathname = usePathname();
+  // const [active, setActive] = useState("/dashboard");
 
   return (
     <Sidebar variant="inset" className="border-0!">
@@ -44,15 +45,14 @@ const CustomSidebar = () => {
       <SidebarContent className="bg-background">
         <SidebarMenu className="py-2 space-y-2">
           {items.map((item) => {
-            const isActive = active === item.title;
+            const isActive = pathname === item.url;
 
             return (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
                   asChild
                   isActive={isActive}
-                  className="rounded-xl h-10 hover:bg-secondary"
-                  onClick={() => setActive(item.title)}>
+                  className="rounded-xl h-10 hover:bg-secondary">
                   <Link
                     href={item.url}
                     className="flex items-center gap-2 text-lg">
