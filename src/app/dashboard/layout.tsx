@@ -1,5 +1,6 @@
-import CustomSidebar from "@/components/custom-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import CustomSidebar from "@/components/sidebar-app";
+import CustomSidebarTrigger from "@/components/sidebar-trigger-app";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
@@ -9,7 +10,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         <CustomSidebar />
         <main className="grow p-2 bg-white rounded-lg shadow-lg">
           <div>
-            <SidebarTrigger />
+            <CustomSidebarTrigger />
           </div>
           {children}
         </main>
