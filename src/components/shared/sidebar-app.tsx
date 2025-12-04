@@ -37,13 +37,13 @@ const CustomSidebar = () => {
     <Sidebar variant="inset" className="border-0!">
       <SidebarHeader className="bg-background w-full border-b border-border">
         <div className="flex items-center gap-2">
-          <LinkIcon className="w-5 h-5" />
+          <LinkIcon className="w-5 h-5 text-primary" />
           <span className="text-lg font-bold">Shortify</span>
         </div>
       </SidebarHeader>
 
       <SidebarContent className="bg-background">
-        <SidebarMenu className="py-2 space-y-2">
+        <SidebarMenu className="py-2">
           {items.map((item) => {
             const isActive = pathname === item.url;
 

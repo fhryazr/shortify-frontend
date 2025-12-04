@@ -14,7 +14,7 @@ const ProfileCard = ({
 }: ProfileCardProps) => {
   return (
     <Card className="py-4 bg-secondary/50 border-0 shadow-none">
-      <CardContent className="flex items-center gap-2">
+      <CardContent className="flex items-center gap-2 px-4">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
