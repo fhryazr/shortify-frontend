@@ -20,6 +20,7 @@ import {
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
+import ProfileCard from "./profile-card";
 
 const items = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -31,7 +32,6 @@ const items = [
 
 const CustomSidebar = () => {
   const pathname = usePathname();
-  // const [active, setActive] = useState("/dashboard");
 
   return (
     <Sidebar variant="inset" className="border-0!">
@@ -52,7 +52,7 @@ const CustomSidebar = () => {
                 <SidebarMenuButton
                   asChild
                   isActive={isActive}
-                  className="rounded-xl h-10 hover:bg-secondary">
+                  className="rounded-xl h-10 hover:bg-secondary/50 hover:text-primary">
                   <Link
                     href={item.url}
                     className="flex items-center gap-2 text-lg">
@@ -67,10 +67,11 @@ const CustomSidebar = () => {
       </SidebarContent>
 
       <SidebarFooter className="bg-background border-t">
+        <ProfileCard />
         <Button
-          variant="secondary"
-          className="w-full hover:bg-destructive hover:text-white">
-          Logout <LogOut />
+          variant="ghost"
+          className="w-full text-destructive hover:bg-destructive hover:text-white">
+          <LogOut /> Logout
         </Button>
       </SidebarFooter>
     </Sidebar>
