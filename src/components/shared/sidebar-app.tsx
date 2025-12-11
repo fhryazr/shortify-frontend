@@ -35,14 +35,14 @@ const CustomSidebar = () => {
 
   return (
     <Sidebar variant="inset" className="border-0!">
-      <SidebarHeader className="bg-background w-full border-b border-border">
+      <SidebarHeader className="bg-background w-full border-b border-border px-2 lg:px-0">
         <div className="flex items-center gap-2">
           <LinkIcon className="w-5 h-5 text-primary" />
           <span className="text-lg font-bold">Shortify</span>
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="bg-background">
+      <SidebarContent className="bg-background px-2 lg:px-0">
         <SidebarMenu className="py-2">
           {items.map((item) => {
             const isActive = pathname === item.url;
@@ -66,7 +66,7 @@ const CustomSidebar = () => {
         </SidebarMenu>
       </SidebarContent>
 
-      <SidebarFooter className="bg-background border-t">
+      <SidebarFooter className="bg-background border-t px-2 lg:px-0">
         <ProfileCard />
         <Button
           variant="ghost"
