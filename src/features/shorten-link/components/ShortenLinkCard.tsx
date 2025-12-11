@@ -11,11 +11,11 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
       <CardContent className="space-y-2 px-4">
         <div>
           <h3 className="text-muted-foreground text-xs">Original URL</h3>
-          <p className="text-base">{link.originalLink}</p>
+          <p className="text-base">{link.url}</p>
         </div>
         <div>
           <h3 className="text-muted-foreground text-xs">Short URL</h3>
-          <p className="text-primary text-base">{link.shortLink}</p>
+          <p className="text-primary text-base">{`short.ly/${link.shortCode}`}</p>
         </div>
         <div className="flex gap-2 text-xs text-muted-foreground">
           <p>Created: {formatDate(link?.createdAt)}</p>

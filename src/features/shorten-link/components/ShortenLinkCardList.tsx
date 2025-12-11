@@ -3,14 +3,22 @@ import ShortenLinkCard from "./ShortenLinkCard";
 
 type ShortenLinkCardListProps = {
   links: ShortenLink[];
+  isLoading?: boolean;
 };
 
-const ShortenLinkCardList = ({ links }: ShortenLinkCardListProps) => {
+const ShortenLinkCardList = ({
+  links,
+  isLoading,
+}: ShortenLinkCardListProps) => {
   return (
     <div className="space-y-2">
-      {links.map((link) => (
-        <ShortenLinkCard key={link.id} link={link} />
-      ))}
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : links && links.length > 0 ? (
+        links.map((link) => <ShortenLinkCard key={link.id} link={link} />)
+      ) : (
+        <p>No links available.</p>
+      )}
     </div>
   );
 };

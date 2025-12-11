@@ -1,9 +1,8 @@
 export type ShortenLink = {
-  id: string | number;
+  id: string;
+  url: string;
   shortCode: string;
-  shortLink: string;
-  originalLink: string;
-  clicks?: number;
+  accessCount?: number;
   createdAt?: string;
   updatedAt?: string;
 }
