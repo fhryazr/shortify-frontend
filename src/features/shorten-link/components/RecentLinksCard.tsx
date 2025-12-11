@@ -38,7 +38,8 @@ import { useGetShortenLinks } from "@/api/shorten/getShorten";
 // ];
 
 const RecentLinksCard = () => {
-  const { data: links, isLoading: fetchLinksLoading } = useGetShortenLinks();
+  const { data: links, isLoading: fetchLinksLoading } =
+    useGetShortenLinks("recently");
 
   return (
     <Card>
