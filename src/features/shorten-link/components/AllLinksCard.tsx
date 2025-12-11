@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import ShortenLinkCardList from "./ShortenLinkCardList";
-import { useGetShortenLinks } from "@/api/shorten/getShorten";
+import { useGetShortenLinks } from "@/api/shorten/get-shorten";
 
 const AllLinksCard = () => {
   const { data: links, isLoading: fetchLinksLoading } = useGetShortenLinks();

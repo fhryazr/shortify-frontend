@@ -8,13 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import ShortenLinkCardList from "./ShortenLinkCardList";
-import { useGetShortenLinks } from "@/api/shorten/getShorten";
+import { useGetShortenLinks } from "@/api/shorten/get-shorten";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const RecentLinksCard = () => {
-  const { data: links, isLoading: fetchLinksLoading } =
-    useGetShortenLinks("recently");
+  const { data: links, isLoading: fetchLinksLoading } = useGetShortenLinks({
+    sort: "recently",
+  });
 
   return (
     <Card>
