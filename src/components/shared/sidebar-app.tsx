@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ChartLine,
   LayoutDashboard,
   LinkIcon,
   LogOut,
@@ -25,7 +24,6 @@ import ProfileCard from "./profile-card";
 const items = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
   { title: "My Links", url: "/dashboard/my-links", icon: LinkIcon },
-  { title: "Analytics", url: "/dashboard/analytics", icon: ChartLine },
   { title: "QR Codes", url: "/dashboard/qr-codes", icon: QrCode },
   { title: "Settings", url: "/dashboard/settings", icon: Settings },
 ];

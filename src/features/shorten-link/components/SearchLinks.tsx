@@ -14,15 +14,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { FilterIcon, SearchIcon } from "lucide-react";
-import { useState } from "react";
+import { SortOption } from "./RecentLinksCard";
 
-const SearchLinks = () => {
-  const [filter, setFilter] = useState("recently");
+type SearchLinksProps = {
+  onChange: (value: string) => void;
+  filter: SortOption;
+  setFilter: (filter: SortOption) => void;
+};
+
+const SearchLinks = ({ onChange, setFilter, filter }: SearchLinksProps) => {
+  const handleFilterChange = (value: string) => {
+    setFilter(value as SortOption);
+  };
 
   return (
     <div className="flex gap-2">
       <InputGroup>
-        <InputGroupInput placeholder="Search..." />
+        <InputGroupInput
+          placeholder="Search..."
+          onChange={(e) => onChange(e.target.value)}
+        />
         <InputGroupAddon>
           <SearchIcon />
         </InputGroupAddon>
@@ -36,15 +47,14 @@ const SearchLinks = () => {
         <DropdownMenuContent
           className="w-fit bg-background py-2 shadow-lg border border-border rounded-lg mt-2"
           align="end">
-          <DropdownMenuRadioGroup value={filter} onValueChange={setFilter}>
+          <DropdownMenuRadioGroup
+            value={filter}
+            onValueChange={handleFilterChange}>
             <DropdownMenuRadioItem value="recently">
               Most Recent
             </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="most-click">
+            <DropdownMenuRadioItem value="most-clicks">
               Most Clicks
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="alphabetical">
-              Alpahabetical
             </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>

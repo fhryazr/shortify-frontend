@@ -2,14 +2,7 @@ import { formatDate } from "@/lib/utils";
 import { ShortenLink } from "../types/type";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  BarChart3,
-  Copy,
-  Edit,
-  ExternalLink,
-  Trash2,
-  TrendingUpIcon,
-} from "lucide-react";
+import { Copy, Edit, ExternalLink, Trash2, TrendingUpIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {

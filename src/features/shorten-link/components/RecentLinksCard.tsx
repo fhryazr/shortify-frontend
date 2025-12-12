@@ -11,24 +11,43 @@ import ShortenLinkCardList from "./ShortenLinkCardList";
 import { useGetShortenLinks } from "@/api/shorten/get-shorten";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const RecentLinksCard = () => {
+export type SortOption = "recently" | "most-click";
+
+type LinkCardProps = {
+  search?: string;
+  sort?: SortOption;
+  limit?: number;
+};
+
+const RecentLinksCard = ({ limit, search, sort }: LinkCardProps) => {
   const { data: links, isLoading: fetchLinksLoading } = useGetShortenLinks({
-    sort: "recently",
+    sort,
+    search,
+    limit,
   });
+
+  const path = usePathname();
+  const onDashboard = path === "/dashboard";
+
+  const title = onDashboard ? "Recent Links" : "All Links";
+  const description = onDashboard
+    ? "Your most recently created short links"
+    : `${links?.length} total links`;
 
   return (
     <Card>
       <CardHeader className="flex justify-between">
         <div>
-          <CardTitle>Recent Links</CardTitle>
-          <CardDescription>
-            Your most recently created short links
-          </CardDescription>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
         </div>
-        <Button variant="outline" className="bg-white">
-          <Link href="/dashboard/my-links">View All</Link>
-        </Button>
+        {onDashboard && (
+          <Button variant="outline" className="bg-white">
+            <Link href="/dashboard/my-links">View All</Link>
+          </Button>
+        )}
       </CardHeader>
       <CardContent>
         <ShortenLinkCardList

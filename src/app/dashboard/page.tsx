@@ -11,7 +11,7 @@ const Page = () => {
       </div>
       <CreateShortLinkCard />
       <DashboardAnalytics />
-      <RecentLinksCard />
+      <RecentLinksCard sort="recently" limit={3} />
     </section>
   );
 };
