@@ -22,14 +22,16 @@ type LinkCardProps = {
 };
 
 const RecentLinksCard = ({ limit, search, sort }: LinkCardProps) => {
+  const path = usePathname();
+  const onDashboard = path === "/dashboard";
+
+  const finalLimit = onDashboard ? 3 : limit;
+
   const { data: links, isLoading: fetchLinksLoading } = useGetShortenLinks({
     sort,
     search,
-    limit,
+    limit: finalLimit,
   });
-
-  const path = usePathname();
-  const onDashboard = path === "/dashboard";
 
   const title = onDashboard ? "Recent Links" : "All Links";
   const description = onDashboard

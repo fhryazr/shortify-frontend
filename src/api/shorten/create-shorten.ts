@@ -21,7 +21,7 @@ export const useCreateShortenLink = (params: UseCreateShortenLinkParams) => {
     ...params.mutationConfig,
     mutationFn: createShortenLink,
     onSuccess: (data, Variable, onMutateResult, context) => {
-      queryClient.invalidateQueries({ queryKey: getShortenLinksQueryKey("recently") });
+      queryClient.invalidateQueries({ queryKey: ["links"] });
       params.mutationConfig?.onSuccess?.(
         data,
         Variable,

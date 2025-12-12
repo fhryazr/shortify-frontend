@@ -1,3 +1,4 @@
+import { useUpdateShortenLink } from "@/api/shorten/update-shorten";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,22 +13,41 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Edit } from "lucide-react";
+import { useState } from "react";
 
 type EditLinkModalProps = {
+  id: string;
   shortCode: string;
   url: string;
 };
 
-export function EditLinkModal({ shortCode, url }: EditLinkModalProps) {
+export function EditLinkModal({ id, shortCode, url }: EditLinkModalProps) {
+  const [open, setOpen] = useState<boolean>(false);
+  const [newURL, setNewURL] = useState<string>(url);
+
+  const { mutate: updateShortLinkMutation, isPending: updateShortLinkLoading } =
+    useUpdateShortenLink({
+      mutationConfig: {
+        onSuccess: () => {
+          setOpen(false);
+        },
+      },
+    });
+
+  const handleUpdateShortLink = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    updateShortLinkMutation({ id, url: newURL });
+  };
+
   return (
-    <Dialog>
-      <form>
-        <DialogTrigger asChild>
-          <Button variant={"ghost"} size={"icon"}>
-            <Edit />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[600px] bg-white">
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button onClick={() => setOpen(true)} variant={"ghost"} size={"icon"}>
+          <Edit />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[600px] bg-white">
+        <form onSubmit={handleUpdateShortLink}>
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Edit /> Edit URL
@@ -39,26 +59,33 @@ export function EditLinkModal({ shortCode, url }: EditLinkModalProps) {
               </span>
             </DialogDescription>
           </DialogHeader>
-          <div className="py-4">
-            <div className="grid gap-4">
-              <div className="grid gap-3">
-                <Label htmlFor="url">New Destination URL</Label>
-                <Input id="url" name="url" defaultValue={url} />
-              </div>
-              <div className="text-muted-foreground bg-muted px-4 py-2 rounded-lg">
-                <p className="text-xs">Current URL :</p>
-                <p className="text-sm">{url}</p>
-              </div>
+          <div className="grid gap-4 py-8">
+            <div className="grid gap-3">
+              <Label htmlFor="url">New Destination URL</Label>
+              <Input
+                id="url"
+                name="url"
+                defaultValue={url}
+                onChange={(e) => setNewURL(e.target.value)}
+              />
+            </div>
+            <div className="text-muted-foreground bg-muted px-4 py-2 rounded-lg">
+              <p className="text-xs">Current URL :</p>
+              <p className="text-sm">{url}</p>
             </div>
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button type="button" variant="outline">
+                Cancel
+              </Button>
             </DialogClose>
-            <Button type="submit">Save changes</Button>
+            <Button type="submit" disabled={updateShortLinkLoading}>
+              {updateShortLinkLoading ? "Saving..." : "Save changes"}
+            </Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }

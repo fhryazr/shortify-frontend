@@ -34,7 +34,11 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
             <Button variant={"ghost"} size={"icon"}>
               <ExternalLink />
             </Button>
-            <EditLinkModal shortCode={link.shortCode} url={link.url} />
+            <EditLinkModal
+              id={link.id}
+              shortCode={link.shortCode}
+              url={link.url}
+            />
             <Button
               variant={"ghost"}
               size={"icon"}
