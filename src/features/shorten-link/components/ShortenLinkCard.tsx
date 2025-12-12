@@ -2,8 +2,9 @@ import { formatDate } from "@/lib/utils";
 import { ShortenLink } from "../types/type";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy, Edit, ExternalLink, Trash2, TrendingUpIcon } from "lucide-react";
+import { Copy, ExternalLink, Trash2, TrendingUpIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { EditLinkModal } from "./EditLinkModal";
 
 const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
   return (
@@ -33,9 +34,7 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
             <Button variant={"ghost"} size={"icon"}>
               <ExternalLink />
             </Button>
-            <Button variant={"ghost"} size={"icon"}>
-              <Edit />
-            </Button>
+            <EditLinkModal shortCode={link.shortCode} url={link.url} />
             <Button
               variant={"ghost"}
               size={"icon"}
