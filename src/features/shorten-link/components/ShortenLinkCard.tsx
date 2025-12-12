@@ -2,7 +2,14 @@ import { formatDate } from "@/lib/utils";
 import { ShortenLink } from "../types/type";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BarChart3, Copy, Edit, ExternalLink, Trash2 } from "lucide-react";
+import {
+  BarChart3,
+  Copy,
+  Edit,
+  ExternalLink,
+  Trash2,
+  TrendingUpIcon,
+} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
@@ -23,9 +30,9 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
         </div>
         <Separator />
         <div className="flex justify-between">
-          <Button variant="outline">
-            <BarChart3 /> Stats
-          </Button>
+          <p className="flex items-center gap-2 text-sm text-muted-foreground">
+            <TrendingUpIcon className="size-4" /> {link?.accessCount} clicks
+          </p>
           <div className="flex gap-1">
             <Button variant={"ghost"} size={"icon"}>
               <Copy />

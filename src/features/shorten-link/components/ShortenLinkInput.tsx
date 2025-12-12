@@ -3,6 +3,7 @@ import { useCreateShortenLink } from "@/api/shorten/create-shorten";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const ShortenLinkInput = () => {
   const [url, setUrl] = useState<string>("");
@@ -11,7 +12,7 @@ const ShortenLinkInput = () => {
     useCreateShortenLink({
       mutationConfig: {
         onSuccess: () => {
-          alert("Short link created successfully!");
+          toast.success("Short link created successfully!");
         },
       },
     });
