@@ -1,4 +1,7 @@
-import { deleteShortenLink, useDeleteShortenLink } from "@/api/shorten/delete-shorten";
+import {
+  deleteShortenLink,
+  useDeleteShortenLink,
+} from "@/api/shorten/delete-shorten";
 import { useUpdateShortenLink } from "@/api/shorten/update-shorten";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,14 +26,16 @@ type DeleteLinkModalProps = {
 export function DeleteLinkModal({ shortCode }: DeleteLinkModalProps) {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { mutate: deleteShortenLinkMutation, isPending: deleteShortenLinkLoading } =
-    useDeleteShortenLink({
-      mutationConfig: {
-        onSuccess: () => {
-          setOpen(false);
-        },
+  const {
+    mutate: deleteShortenLinkMutation,
+    isPending: deleteShortenLinkLoading,
+  } = useDeleteShortenLink({
+    mutationConfig: {
+      onSuccess: () => {
+        setOpen(false);
       },
-    });
+    },
+  });
 
   const handleUpdateShortLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,16 +59,19 @@ export function DeleteLinkModal({ shortCode }: DeleteLinkModalProps) {
             <DialogTitle className="flex items-center gap-2 text-destructive">
               <Trash2 /> Delete URL
             </DialogTitle>
-            <DialogDescription>
-              <p className="font-bold text-base">
-                Are you sure want to delete
+            <DialogDescription className="space-y-2">
+              <span className="font-bold text-base block">
+                Are you sure you want to delete
                 <span className="text-primary font-bold">
-                  {" "}short.ly/{shortCode}
+                  {" "}
+                  short.ly/{shortCode}
                 </span>
-                {" "}?
-              </p>
-              This action cannot be undone and the link will stop working
-              immediatly.
+                ?
+              </span>
+              <span className="block">
+                This action cannot be undone and the link will stop working
+                immediately.
+              </span>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

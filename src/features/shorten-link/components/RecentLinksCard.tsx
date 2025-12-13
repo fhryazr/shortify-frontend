@@ -27,7 +27,7 @@ const RecentLinksCard = ({ limit, search, sort }: LinkCardProps) => {
 
   const finalLimit = onDashboard ? 3 : limit;
 
-  const { data: links, isLoading: fetchLinksLoading } = useGetShortenLinks({
+  const { data: links, isLoading: fetchLinksLoading } =  useGetShortenLinks({
     sort,
     search,
     limit: finalLimit,

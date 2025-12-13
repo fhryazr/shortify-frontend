@@ -1,20 +1,46 @@
-// import { getPostBySlug } from "@/lib/posts";
+import { redirect } from "next/navigation";
+import { axiosInstance } from "@/lib/axios";
+import { AxiosError } from "axios";
+import NotFound from "./not-found";
 
-import { Spinner } from "@/components/ui/spinner";
-import NotFound from "../not-found";
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
-export default async function Page({ params }: { params: { slug: string } }) {
+async function getRedirectUrl(slug: string) {
+  try {
+    const response = await axiosInstance.get(`/${slug}`, {
+      maxRedirects: 0,
+      validateStatus: (status) => status >= 200 && status < 400,
+    });
+
+    // Jika backend return JSON
+    if (response.data?.url) {
+      return response.data.url;
+    }
+
+    // Jika backend return 301/302 dengan location header
+    return response.headers.location || null;
+  } catch (error) {
+    // Type-safe error handling
+    if (error instanceof AxiosError) {
+      // Jika backend return 301/302, ambil dari header Location
+      if (error.response?.status === 301 || error.response?.status === 302) {
+        return error.response.headers.location || null;
+      }
+    }
+
+    return null;
+  }
+}
+
+export default async function RedirectPage({ params }: Props) {
   const { slug } = await params;
-  // const post = getPostBySlug(slug);
+  const redirectUrl = await getRedirectUrl(slug);
 
-  if (slug === "not-found") {
-    return <NotFound />
+  if (!redirectUrl) {
+    return <NotFound />;
   }
 
-  return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center gap-2">
-      <p>Redirecting to short.ly/{slug}</p>
-      <Spinner className="size-8" />
-    </div>
-  );
+  redirect(redirectUrl);
 }

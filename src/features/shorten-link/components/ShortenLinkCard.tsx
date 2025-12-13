@@ -6,6 +6,7 @@ import { Copy, ExternalLink, Trash2, TrendingUpIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { EditLinkModal } from "./EditLinkModal";
 import { DeleteLinkModal } from "./DeleteLinkModal";
+import Link from "next/link";
 
 const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
   return (
@@ -32,9 +33,11 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
             <Button variant={"ghost"} size={"icon"}>
               <Copy />
             </Button>
-            <Button variant={"ghost"} size={"icon"}>
-              <ExternalLink />
-            </Button>
+            <Link href={`http://localhost:3000/${link.shortCode}`} target="_blank" rel="noopener noreferrer">
+              <Button variant={"ghost"} size={"icon"}>
+                <ExternalLink />
+              </Button>
+            </Link>
             <EditLinkModal
               id={link.id}
               shortCode={link.shortCode}
