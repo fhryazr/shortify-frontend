@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { axiosInstance } from "@/lib/axios";
 import { AxiosError } from "axios";
 import NotFound from "./not-found";
+import { queryClient } from "@/lib/react-query";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -18,6 +19,8 @@ async function getRedirectUrl(slug: string) {
     if (response.data?.url) {
       return response.data.url;
     }
+
+    queryClient.invalidateQueries({ queryKey: ["links"] });
 
     // Jika backend return 301/302 dengan location header
     return response.headers.location || null;

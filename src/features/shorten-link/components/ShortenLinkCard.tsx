@@ -2,7 +2,7 @@ import { formatDate } from "@/lib/utils";
 import { ShortenLink } from "../types/type";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy, ExternalLink, Trash2, TrendingUpIcon } from "lucide-react";
+import { Copy, ExternalLink, TrendingUpIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { EditLinkModal } from "./EditLinkModal";
 import { DeleteLinkModal } from "./DeleteLinkModal";

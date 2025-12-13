@@ -1,7 +1,9 @@
 "use client";
+import { getAnalyticsOverviewQueryKey } from "@/api/analytics/get-analytics";
 import { useCreateShortenLink } from "@/api/shorten/create-shorten";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { queryClient } from "@/lib/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -13,6 +15,7 @@ const ShortenLinkInput = () => {
       mutationConfig: {
         onSuccess: () => {
           toast.success("Short link created successfully!");
+          queryClient.invalidateQueries({ queryKey: getAnalyticsOverviewQueryKey() });
         },
       },
     });
