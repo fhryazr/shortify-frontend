@@ -1,3 +1,4 @@
+import { deleteShortenLink, useDeleteShortenLink } from "@/api/shorten/delete-shorten";
 import { useUpdateShortenLink } from "@/api/shorten/update-shorten";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,8 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 
@@ -21,12 +20,11 @@ type DeleteLinkModalProps = {
   url: string;
 };
 
-export function DeleteLinkModal({ id, shortCode, url }: DeleteLinkModalProps) {
+export function DeleteLinkModal({ shortCode }: DeleteLinkModalProps) {
   const [open, setOpen] = useState<boolean>(false);
-  const [newURL, setNewURL] = useState<string>(url);
 
-  const { mutate: updateShortLinkMutation, isPending: updateShortLinkLoading } =
-    useUpdateShortenLink({
+  const { mutate: deleteShortenLinkMutation, isPending: deleteShortenLinkLoading } =
+    useDeleteShortenLink({
       mutationConfig: {
         onSuccess: () => {
           setOpen(false);
@@ -36,7 +34,7 @@ export function DeleteLinkModal({ id, shortCode, url }: DeleteLinkModalProps) {
 
   const handleUpdateShortLink = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateShortLinkMutation({ id, url: newURL });
+    deleteShortenLinkMutation(shortCode);
   };
 
   return (
@@ -58,9 +56,9 @@ export function DeleteLinkModal({ id, shortCode, url }: DeleteLinkModalProps) {
             </DialogTitle>
             <DialogDescription>
               <p className="font-bold text-base">
-                Are you sure want to delete{" "}
+                Are you sure want to delete
                 <span className="text-primary font-bold">
-                  short.ly/{shortCode}
+                  {" "}short.ly/{shortCode}
                 </span>
                 {" "}?
               </p>
@@ -77,8 +75,8 @@ export function DeleteLinkModal({ id, shortCode, url }: DeleteLinkModalProps) {
             <Button
               type="submit"
               variant={"destructive"}
-              disabled={updateShortLinkLoading}>
-              {updateShortLinkLoading ? "Saving..." : "Delete"}
+              disabled={deleteShortenLinkLoading}>
+              {deleteShortenLinkLoading ? "Saving..." : "Delete"}
             </Button>
           </DialogFooter>
         </form>

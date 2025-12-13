@@ -8,15 +8,18 @@ type UpdateShortenLinkParams = {
   url: string;
 };
 
+// api call
 export const updateShortenLink = async ({ id, url }: UpdateShortenLinkParams) => {
   const response = await axiosInstance.patch(`/links/${id}`, { url });
   return response.data;
 };
 
+// custom-hooks params type
 type UseUpdateShortenLinkParams = {
   mutationConfig?: MutationConfig<typeof updateShortenLink>;
 };
 
+// custom-hooks
 export const useUpdateShortenLink = (params?: UseUpdateShortenLinkParams) => {
   return useMutation({
     ...params?.mutationConfig,
