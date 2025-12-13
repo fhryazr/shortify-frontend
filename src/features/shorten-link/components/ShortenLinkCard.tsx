@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Copy, ExternalLink, Trash2, TrendingUpIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { EditLinkModal } from "./EditLinkModal";
+import { DeleteLinkModal } from "./DeleteLinkModal";
 
 const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
   return (
@@ -39,12 +40,11 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
               shortCode={link.shortCode}
               url={link.url}
             />
-            <Button
-              variant={"ghost"}
-              size={"icon"}
-              className="text-destructive">
-              <Trash2 />
-            </Button>
+            <DeleteLinkModal
+              id={link.id}
+              shortCode={link.shortCode}
+              url={link.url}
+            />
           </div>
         </div>
       </CardContent>

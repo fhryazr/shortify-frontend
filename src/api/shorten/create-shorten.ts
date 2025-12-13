@@ -1,7 +1,6 @@
 import { axiosInstance } from "@/lib/axios"
 import { MutationConfig, queryClient } from "@/lib/react-query";
 import { useMutation } from "@tanstack/react-query";
-import { getShortenLinksQueryKey } from "./get-shorten";
 
 export type ShortenRequest = {
   url: string,
