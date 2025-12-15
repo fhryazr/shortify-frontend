@@ -1,8 +1,4 @@
-import {
-  deleteShortenLink,
-  useDeleteShortenLink,
-} from "@/api/shorten/delete-shorten";
-import { useUpdateShortenLink } from "@/api/shorten/update-shorten";
+import { useDeleteShortenLink } from "@/api/shorten/delete-shorten";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
