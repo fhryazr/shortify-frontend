@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { EditLinkModal } from "./EditLinkModal";
 import { DeleteLinkModal } from "./DeleteLinkModal";
 import Link from "next/link";
+import QrCodeModal from "./QrCodeModal";
 
 const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
   return (
@@ -33,7 +34,11 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
             <Button variant={"ghost"} size={"icon"}>
               <Copy />
             </Button>
-            <Link href={`http://localhost:3000/${link.shortCode}`} target="_blank" rel="noopener noreferrer">
+            <QrCodeModal shortCode={link.shortCode} />
+            <Link
+              href={`http://localhost:3000/${link.shortCode}`}
+              target="_blank"
+              rel="noopener noreferrer">
               <Button variant={"ghost"} size={"icon"}>
                 <ExternalLink />
               </Button>
