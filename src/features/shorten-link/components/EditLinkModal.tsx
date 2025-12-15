@@ -55,7 +55,7 @@ export function EditLinkModal({ id, shortCode, url }: EditLinkModalProps) {
             <DialogDescription>
               Change the destination URL for{" "}
               <span className="text-primary font-medium">
-                short.ly/{shortCode}
+                {process.env.NEXT_PUBLIC_BASE_URL}/{shortCode}
               </span>
             </DialogDescription>
           </DialogHeader>

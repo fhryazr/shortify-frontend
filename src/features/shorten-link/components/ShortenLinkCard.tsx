@@ -19,7 +19,7 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
         </div>
         <div>
           <h3 className="text-muted-foreground text-xs">Short URL</h3>
-          <p className="text-primary text-base">{`short.ly/${link.shortCode}`}</p>
+          <p className="text-primary text-base">{`${process.env.NEXT_PUBLIC_BASE_URL}/${link.shortCode}`}</p>
         </div>
         <div className="flex gap-2 text-xs text-muted-foreground">
           <p>Created: {formatDate(link?.createdAt)}</p>

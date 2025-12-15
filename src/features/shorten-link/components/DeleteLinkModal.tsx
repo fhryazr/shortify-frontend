@@ -64,7 +64,7 @@ export function DeleteLinkModal({ shortCode }: DeleteLinkModalProps) {
                 Are you sure you want to delete
                 <span className="text-primary font-bold">
                   {" "}
-                  short.ly/{shortCode}
+                  {process.env.NEXT_PUBLIC_BASE_URL}/{shortCode}
                 </span>
                 ?
               </span>
