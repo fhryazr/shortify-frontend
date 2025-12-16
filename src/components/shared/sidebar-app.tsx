@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  LayoutDashboard,
-  LinkIcon,
-  LogOut,
-  QrCode,
-  Settings,
-} from "lucide-react";
+import { LayoutDashboard, LinkIcon, LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -20,6 +14,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import ProfileCard from "./profile-card";
+import Logo from "./logo";
 
 const items = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -32,10 +27,7 @@ const CustomSidebar = () => {
   return (
     <Sidebar variant="inset" className="border-0!">
       <SidebarHeader className="bg-background w-full border-b border-border px-2 lg:px-0">
-        <div className="flex items-center gap-2">
-          <LinkIcon className="w-5 h-5 text-primary" />
-          <span className="text-lg font-bold">Shortify</span>
-        </div>
+        <Logo />
       </SidebarHeader>
 
       <SidebarContent className="bg-background px-2 lg:px-0">
