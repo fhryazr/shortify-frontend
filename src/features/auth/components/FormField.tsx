@@ -1,4 +1,9 @@
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from "@/components/ui/field";
 import {
   InputGroup,
   InputGroupAddon,
@@ -13,6 +18,7 @@ interface FormFieldProps {
   type: string;
   placeholder: string;
   value: string;
+  description?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 }
@@ -25,12 +31,15 @@ const FormField = ({
   placeholder,
   onChange,
   icon,
+  description = "",
   className = "",
 }: FormFieldProps) => {
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
   return (
     <Field data-invalid={isInvalid}>
-      <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+      <FieldLabel className="leading-2" htmlFor={field.name}>
+        {label}
+      </FieldLabel>
       <InputGroup className={`rounded-lg h-10 ${className}`}>
         <InputGroupInput
           type={type}
@@ -40,7 +49,10 @@ const FormField = ({
         />
         <InputGroupAddon>{icon}</InputGroupAddon>
       </InputGroup>
-      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+      <FieldDescription>{description}</FieldDescription>
+      {isInvalid && (
+        <FieldError className="leading-0 -mt-1 mb-4" errors={field.state.meta.errors} />
+      )}
     </Field>
   );
 };

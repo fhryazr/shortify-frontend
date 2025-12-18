@@ -1,42 +1,59 @@
-import { useForm } from "@tanstack/react-form";
-import { loginZodSchema } from "../schema/login.shcema";
+"use client";
+
 import { toast } from "sonner";
+import { registerZodSchema } from "../schema/register.schema";
+import { useForm } from "@tanstack/react-form";
 import FormField from "./FormField";
-import { LockIcon, MailIcon } from "lucide-react";
+import { LockIcon, MailIcon, User2Icon } from "lucide-react";
 
-const LoginForm = () => {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    form.handleSubmit();
-    // alert(`Email: ${email}\nPassword: ${password}`);
-    // Handle form submission logic here
-  };
-
+const RegisterForm = () => {
   const form = useForm({
     defaultValues: {
+      fullname: "",
       email: "",
       password: "",
     },
     validators: {
-      onSubmit: loginZodSchema,
+      onSubmit: registerZodSchema,
     },
     onSubmit: async ({ value }) => {
-      toast.success("Login successful!");
+      toast.success("Registration successful!");
       console.log(value);
     },
   });
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    form.handleSubmit();
+  };
+
   return (
-    <form id="login-form" onSubmit={handleSubmit} className="space-y-2">
+    <form id="register-form" onSubmit={handleSubmit} className="space-y-2">
+      <form.Field
+        name="fullname"
+        children={(field) => (
+          <FormField
+            field={field}
+            label="Full Name"
+            type="text"
+            value={field.state.value}
+            placeholder="Enter your full name"
+            description=""
+            onChange={(e) => field.handleChange(e.target.value)}
+            icon={<User2Icon />}
+          />
+        )}
+      />
       <form.Field
         name="email"
         children={(field) => (
           <FormField
             field={field}
-            label="Email address"
+            label="Email"
             type="email"
             value={field.state.value}
             placeholder="Enter your email"
+            description=""
             onChange={(e) => field.handleChange(e.target.value)}
             icon={<MailIcon />}
           />
@@ -51,6 +68,7 @@ const LoginForm = () => {
             type="password"
             value={field.state.value}
             placeholder="Enter your password"
+            description=""
             onChange={(e) => field.handleChange(e.target.value)}
             icon={<LockIcon />}
           />
@@ -60,4 +78,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
