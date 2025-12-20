@@ -8,9 +8,7 @@ import { Separator } from "@/components/ui/separator";
 
 const LoginForm = () => {
   const { form, isLoading } = useLoginForm();
-
-  console.log(isLoading);
-
+  
   return (
     <form
       id="login-form"

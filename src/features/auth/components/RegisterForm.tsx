@@ -1,31 +1,13 @@
 "use client";
 
-import { toast } from "sonner";
-import { registerZodSchema } from "../schema/register.schema";
-import { useForm } from "@tanstack/react-form";
 import FormField from "./FormField";
 import { LockIcon, MailIcon, User2Icon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useRegisterForm } from "../hooks/useRegisterForm";
+import { Spinner } from "@/components/ui/spinner";
 
 const RegisterForm = () => {
-  const form = useForm({
-    defaultValues: {
-      fullname: "",
-      email: "",
-      password: "",
-    },
-    validators: {
-      onSubmit: registerZodSchema,
-    },
-    onSubmit: async ({ value }) => {
-      toast.success("Registration successful!");
-      console.log(value);
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    form.handleSubmit();
-  };
+  const { form, isLoading, handleSubmit } = useRegisterForm();
 
   return (
     <form id="register-form" onSubmit={handleSubmit} className="space-y-2">
@@ -74,6 +56,13 @@ const RegisterForm = () => {
           />
         )}
       />
+      <Button
+        type="submit"
+        form="register-form"
+        className="w-full"
+        disabled={isLoading}>
+        Create Account {isLoading ? <Spinner /> : null}
+      </Button>
     </form>
   );
 };
