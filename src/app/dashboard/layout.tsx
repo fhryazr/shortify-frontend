@@ -6,9 +6,9 @@ import { ReactNode } from "react";
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
     <SidebarProvider>
-      <section className="flex w-full bg-background px-2 py-2">
+      <section className="flex h-screen w-full py-2 bg-background">
         <CustomSidebar />
-        <main className="grow p-2 bg-white h-fit rounded-lg shadow-lg">
+        <main className="w-full h-full p-2 flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
           <div>
             <CustomSidebarTrigger />
           </div>

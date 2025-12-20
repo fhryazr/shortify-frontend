@@ -14,7 +14,7 @@ const MyLinksPage = () => {
   const searchParams = debouncedSearch?.trim() || undefined;
 
   return (
-    <section className="px-2 py-4 space-y-4 overflow-auto">
+    <section className="flex-1 flex flex-col gap-4 px-2 py-4 overflow-auto">
       <div>
         <h1 className="text-2xl font-bold">My Links</h1>
         <p>Manage and track all your shortened links in one place</p>

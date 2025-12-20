@@ -27,7 +27,7 @@ const RecentLinksCard = ({ limit, search, sort }: LinkCardProps) => {
 
   const finalLimit = onDashboard ? 3 : limit;
 
-  const { data: links, isLoading: fetchLinksLoading } =  useGetShortenLinks({
+  const { data: links, isLoading: fetchLinksLoading } = useGetShortenLinks({
     sort,
     search,
     limit: finalLimit,
@@ -39,8 +39,8 @@ const RecentLinksCard = ({ limit, search, sort }: LinkCardProps) => {
     : `${links?.length} total links`;
 
   return (
-    <Card>
-      <CardHeader className="flex justify-between">
+    <Card className="flex-1 flex flex-col overflow-auto">
+      <CardHeader className="flex flex-row justify-between">
         <div>
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -51,7 +51,7 @@ const RecentLinksCard = ({ limit, search, sort }: LinkCardProps) => {
           </Button>
         )}
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1 overflow-auto">
         <ShortenLinkCardList
           links={links || []}
           isLoading={fetchLinksLoading}

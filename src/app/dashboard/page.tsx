@@ -12,17 +12,21 @@ const Page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) {
+    if (!session && !isPending) {
       router.replace("/login");
     }
-  }, [session, router]);
+  }, [session, isPending, router]);
 
   if (isPending) {
     return <div>Loading...</div>;
   }
 
+  if (!session) {
+    return null;
+  }
+
   return (
-    <section className="px-2 py-4 space-y-4 overflow-auto">
+    <section className="flex-1 p-2 flex flex-col gap-4 overflow-auto">
       <div>
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p>Welcome back! Here&apos;s an overview of your links</p>
