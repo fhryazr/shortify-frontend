@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -8,12 +8,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import LoginForm from "./LoginForm";
-import SocialMediaAuthButton from "./SocialMediaAuthButton";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import { useEffect } from "react";
 
 const LoginCard = () => {
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
+
+  useEffect(() => {
+    if (session?.user) {
+      router.replace("/dashboard");
+    }
+  }, [session, router]);
+
   return (
     <Card className="w-100">
       <CardHeader>
@@ -25,17 +35,8 @@ const LoginCard = () => {
       <CardContent>
         <LoginForm />
       </CardContent>
-      <CardFooter className="flex-col gap-2">
-        <Button className="w-full" type="submit" form="login-form">
-          Sign In
-        </Button>
-        <div className="flex items-center w-full gap-2 my-4 text-muted-foreground">
-          <Separator className="flex-1" />
-          <p className="text-xs">Or continue with</p>
-          <Separator className="flex-1" />
-        </div>
-        <SocialMediaAuthButton />
-        <p className="text-sm">
+      <CardFooter>
+        <p className="text-sm text-center w-full">
           Don&apos;t have an account?{" "}
           <Link href="/register" className="text-primary hover:underline">
             Create account

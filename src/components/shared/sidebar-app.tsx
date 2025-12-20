@@ -15,6 +15,7 @@ import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import ProfileCard from "./profile-card";
 import Logo from "./logo";
+import { authClient } from "@/lib/auth-client";
 
 const items = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -23,6 +24,11 @@ const items = [
 
 const CustomSidebar = () => {
   const pathname = usePathname();
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+    localStorage.removeItem("authToken")
+  };
 
   return (
     <Sidebar variant="inset" className="border-0!">
@@ -57,6 +63,7 @@ const CustomSidebar = () => {
       <SidebarFooter className="bg-background border-t px-2 lg:px-0">
         <ProfileCard />
         <Button
+          onClick={handleLogout}
           variant="ghost"
           className="w-full text-destructive hover:bg-destructive hover:text-white">
           <LogOut /> Logout

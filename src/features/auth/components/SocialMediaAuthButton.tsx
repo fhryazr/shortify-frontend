@@ -3,7 +3,7 @@ import { SiGithub, SiGoogle } from "react-icons/si";
 
 const SocialMediaAuthButton = () => {
   return (
-    <div className="flex flex-row w-full gap-2 mb-8">
+    <div className="flex flex-row w-full gap-2">
       <Button variant="outline" className="flex-1">
         <SiGoogle /> Google
       </Button>
