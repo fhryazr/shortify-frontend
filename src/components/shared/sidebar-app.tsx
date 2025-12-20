@@ -16,6 +16,7 @@ import { usePathname } from "next/navigation";
 import ProfileCard from "./profile-card";
 import Logo from "./logo";
 import { authClient } from "@/lib/auth-client";
+import { useQueryClient } from "@tanstack/react-query";
 
 const items = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -24,10 +25,13 @@ const items = [
 
 const CustomSidebar = () => {
   const pathname = usePathname();
+  const queryClient = useQueryClient();
 
   const handleLogout = async () => {
     await authClient.signOut();
-    localStorage.removeItem("authToken")
+    localStorage.removeItem("authToken");
+    // Clear all cached queries when logging out
+    queryClient.clear();
   };
 
   return (

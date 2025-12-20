@@ -3,8 +3,6 @@ import { LockIcon, MailIcon } from "lucide-react";
 import { useLoginForm } from "../hooks/useLoginForm";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import SocialMediaAuthButton from "./SocialMediaAuthButton";
-import { Separator } from "@/components/ui/separator";
 
 const LoginForm = () => {
   const { form, isLoading } = useLoginForm();

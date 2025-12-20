@@ -13,6 +13,9 @@ interface GetShortenLinksParams {
 export const getShortenLinks = async ({ limit, search, sort }: GetShortenLinksParams) => {
   const response = await axiosInstance.get<ShortenLink[]>('/links', {
     params: { sort, limit, search },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('authToken') || ''}`,
+    }
   });
   return response.data;
 };

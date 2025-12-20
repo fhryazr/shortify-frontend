@@ -3,9 +3,11 @@ import { loginZodSchema } from "../schema/login.shcema";
 import { authClient, getErrorMessage } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const useLoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const queryClient = useQueryClient();
 
   const form = useForm({
     defaultValues: {
@@ -34,6 +36,8 @@ export const useLoginForm = () => {
         }
 
         if (authResponseData?.token) {
+          // Clear all cached queries from previous account
+          queryClient.clear();
           localStorage.setItem("authToken", authResponseData.token);
         }
 

@@ -7,7 +7,11 @@ export type ShortenRequest = {
 }
 
 export const createShortenLink = async (url: ShortenRequest) => {
-  const response = await axiosInstance.post("/links", url)
+  const response = await axiosInstance.post("/links", url, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('authToken') || ''}`,
+    }
+  });
   return response.data;
 }
 
