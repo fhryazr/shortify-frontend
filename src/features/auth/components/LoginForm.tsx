@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 
 const LoginForm = () => {
   const { form, isLoading } = useLoginForm();
-  
+
   return (
     <form
       id="login-form"
@@ -52,12 +52,12 @@ const LoginForm = () => {
         disabled={isLoading}>
         Sign In {isLoading ? <Spinner /> : null}
       </Button>
-      <div className="flex items-center w-full gap-2 my-4 text-muted-foreground">
+      {/* <div className="flex items-center w-full gap-2 my-4 text-muted-foreground">
         <Separator className="flex-1" />
         <p className="text-xs">Or continue with</p>
         <Separator className="flex-1" />
-      </div>
-      <SocialMediaAuthButton />
+      </div> */}
+      {/* <SocialMediaAuthButton /> */}
     </form>
   );
 };
