@@ -3,7 +3,11 @@ import { QueryConfig } from "@/lib/react-query";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 
 export const getAnalyticsOverview = async () => {
-  const response = await axiosInstance.get("/analytics/overview");
+  const response = await axiosInstance.get("/analytics/overview", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    },
+  });
   return response.data;
 }
 
