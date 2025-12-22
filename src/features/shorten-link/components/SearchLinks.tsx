@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { FilterIcon, SearchIcon } from "lucide-react";
 import { SortOption } from "./RecentLinksCard";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type SearchLinksProps = {
   onChange: (value: string) => void;
@@ -23,6 +24,8 @@ type SearchLinksProps = {
 };
 
 const SearchLinks = ({ onChange, setFilter, filter }: SearchLinksProps) => {
+  const isMobile = useIsMobile();
+
   const handleFilterChange = (value: string) => {
     setFilter(value as SortOption);
   };
@@ -41,7 +44,7 @@ const SearchLinks = ({ onChange, setFilter, filter }: SearchLinksProps) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline">
-            <FilterIcon /> Filters
+            <FilterIcon /> {isMobile ? "" : "Filters"}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent

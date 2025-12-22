@@ -39,7 +39,8 @@ const RecentLinksCard = ({ limit, search, sort }: LinkCardProps) => {
     : `${links?.length} total links`;
 
   return (
-    <Card className="flex-1 flex flex-col overflow-auto">
+    <Card
+      className={`flex-1 flex flex-col ${onDashboard ? "" : "overflow-auto"}`}>
       <CardHeader className="flex flex-row justify-between">
         <div>
           <CardTitle>{title}</CardTitle>
@@ -51,7 +52,7 @@ const RecentLinksCard = ({ limit, search, sort }: LinkCardProps) => {
           </Button>
         )}
       </CardHeader>
-      <CardContent className="flex-1 overflow-auto">
+      <CardContent className={`flex-1 ${onDashboard ? "" : "overflow-auto"}`}>
         <ShortenLinkCardList
           links={links || []}
           isLoading={fetchLinksLoading}

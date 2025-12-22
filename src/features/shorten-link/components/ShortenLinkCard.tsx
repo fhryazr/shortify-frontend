@@ -8,8 +8,12 @@ import { EditLinkModal } from "./EditLinkModal";
 import { DeleteLinkModal } from "./DeleteLinkModal";
 import Link from "next/link";
 import QrCodeModal from "./QrCodeModal";
+import { useIsMobile } from "@/hooks/use-mobile";
+import MoreActionButton from "./MoreActionButton";
 
 const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
+  const isMobile = useIsMobile();
+
   return (
     <Card className="shadow-none py-4">
       <CardContent className="space-y-2 px-4">
@@ -30,30 +34,39 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
           <p className="flex items-center gap-2 text-sm text-muted-foreground">
             <TrendingUpIcon className="size-4" /> {link?.accessCount} clicks
           </p>
-          <div className="flex gap-1">
-            <Button variant={"ghost"} size={"icon"}>
-              <Copy />
-            </Button>
-            <QrCodeModal shortCode={link.shortCode} />
-            <Link
-              href={`http://localhost:3000/${link.shortCode}`}
-              target="_blank"
-              rel="noopener noreferrer">
+          {isMobile ? (
+            <div className="space-x-2">
               <Button variant={"ghost"} size={"icon"}>
-                <ExternalLink />
+                <Copy />
               </Button>
-            </Link>
-            <EditLinkModal
-              id={link.id}
-              shortCode={link.shortCode}
-              url={link.url}
-            />
-            <DeleteLinkModal
-              id={link.id}
-              shortCode={link.shortCode}
-              url={link.url}
-            />
-          </div>
+              <MoreActionButton link={link} />
+            </div>
+          ) : (
+            <div className="flex gap-1">
+              <Button variant={"ghost"} size={"icon"}>
+                <Copy />
+              </Button>
+              <QrCodeModal shortCode={link.shortCode} />
+              <Link
+                href={`http://localhost:3000/${link.shortCode}`}
+                target="_blank"
+                rel="noopener noreferrer">
+                <Button variant={"ghost"} size={"icon"}>
+                  <ExternalLink />
+                </Button>
+              </Link>
+              <EditLinkModal
+                id={link.id}
+                shortCode={link.shortCode}
+                url={link.url}
+              />
+              <DeleteLinkModal
+                id={link.id}
+                shortCode={link.shortCode}
+                url={link.url}
+              />
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>

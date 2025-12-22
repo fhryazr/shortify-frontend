@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Copy, DownloadIcon, Link2Icon, QrCodeIcon } from "lucide-react";
 import { useRef } from "react";
 import QRCode from "react-qr-code";
@@ -65,11 +66,17 @@ const QrCodeModal = ({ shortCode }: QrCodeProps) => {
     img.src = "data:image/svg+xml;base64," + base64;
   };
 
+  const isMobile = useIsMobile();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"ghost"}>
-          <QrCodeIcon />
+        <Button
+          // onClick={() => setOpen(true)}
+          className={isMobile ? "w-full justify-start" : ""}
+          variant={"ghost"}
+          size={isMobile ? "default" : "icon"}>
+          <QrCodeIcon /> {isMobile ? "QR Code" : ""}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[400px] w-[400px] bg-white space-y-4">

@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 
@@ -38,15 +39,21 @@ export function DeleteLinkModal({ shortCode }: DeleteLinkModalProps) {
     deleteShortenLinkMutation(shortCode);
   };
 
+  const isMobile = useIsMobile();
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           onClick={() => setOpen(true)}
+          className={
+            isMobile
+              ? "w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground"
+              : "text-destructive hover:bg-destructive hover:text-destructive-foreground"
+          }
           variant={"ghost"}
-          size={"icon"}
-          className="text-destructive hover:bg-destructive hover:text-destructive-foreground">
-          <Trash2 />
+          size={isMobile ? "default" : "icon"}>
+          <Trash2 /> {isMobile ? "Delete" : ""}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[475px] bg-white">

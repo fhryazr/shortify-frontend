@@ -24,7 +24,7 @@ const RegisterCard = () => {
   }, [session, router]);
 
   return (
-    <Card className="w-100">
+    <Card className="w-80 md:w-100">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
         <CardDescription>
