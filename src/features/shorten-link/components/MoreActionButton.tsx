@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Copy, ExternalLink, MoreHorizontalIcon } from "lucide-react";
+import { ExternalLink, MoreHorizontalIcon } from "lucide-react";
 import { EditLinkModal } from "./EditLinkModal";
 import QrCodeModal from "./QrCodeModal";
 import Link from "next/link";
@@ -36,7 +36,7 @@ const MoreActionButton = ({ link }: { link: ShortenLink }) => {
               className="w-full justify-start rounded-md text-gray-800"
               asChild>
               <Link
-                href={`http://localhost:3000/${link?.shortCode}`}
+                href={`${process.env.NEXT_PUBLIC_BASE_URL}/${link?.shortCode}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full">

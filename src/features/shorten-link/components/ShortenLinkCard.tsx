@@ -48,7 +48,7 @@ const ShortenLinkCard = ({ link }: { link: ShortenLink }) => {
               </Button>
               <QrCodeModal shortCode={link.shortCode} />
               <Link
-                href={`http://localhost:3000/${link.shortCode}`}
+                href={`${process.env.NEXT_PUBLIC_BASE_URL}/${link.shortCode}`}
                 target="_blank"
                 rel="noopener noreferrer">
                 <Button variant={"ghost"} size={"icon"}>
